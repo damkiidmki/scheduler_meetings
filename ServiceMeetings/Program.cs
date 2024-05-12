@@ -37,6 +37,4 @@ public class Program
                 services.AddHostedService<ServiceMeetings.Service.ServiceMeetings>();
 
             });
-
-
 }
