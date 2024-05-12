@@ -16,7 +16,10 @@ namespace ServiceMeetings.Service
         private readonly TimePeriodCollection timePeriods;
         private const string path = "meetings.txt";
 
-        public ServiceMeetings(ISchedulerFactory schedulerFactory,List<Meeting> meetings,IJobFactory jobFactory, TimePeriodCollection timePeriods)
+        public ServiceMeetings(ISchedulerFactory schedulerFactory, 
+            List<Meeting> meetings,
+            IJobFactory jobFactory,
+            TimePeriodCollection timePeriods)
         {
             this.jobFactory = jobFactory;
             this.timePeriods = timePeriods;
@@ -73,9 +76,9 @@ namespace ServiceMeetings.Service
 
                     }
                 }
-                catch
+                catch (Exception exception)
                 {
-                    Console.WriteLine("Что-то пошло не так, повторите операцию");
+                    Console.WriteLine($"Что-то пошло не так, повторите операцию \n{exception.Message}");
                 }
             }
         }
@@ -196,7 +199,7 @@ namespace ServiceMeetings.Service
 
         private bool ValidateMeeting(DateTime timeStartMeeting, DateTime timeEndMeeting, DateTime alertTime)
         {
-            return alertTime < timeStartMeeting && timeStartMeeting < timeEndMeeting;
+            return alertTime < timeStartMeeting && timeStartMeeting < timeEndMeeting && timeStartMeeting > DateTime.Now;
         }
 
         private void Info()
